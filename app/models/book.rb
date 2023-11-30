@@ -1,4 +1,4 @@
 class Book < ApplicationRecord
   validates :title, presence: true
-  # validates :price, decericality: { greate_than: 0 }
+  validates :price, numericality: { greate_than: 0 }
 end
