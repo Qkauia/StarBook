@@ -10,8 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_30_144600) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_151544) do
 # Could not dump table "books" because of following StandardError
 #   Unknown type 'boolen' for column 'onsale'
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+  end
 
 end

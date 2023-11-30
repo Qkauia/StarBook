@@ -10,8 +10,13 @@
   </div>
   <div>
     <ul class="flex gap-3">
-      <li>註冊</li>
-      <li>登入</li>
+      <% if user_signed_in? %>
+        <li><%= current_user.email %></li>
+        <%= link_to '登出', '#' %>
+      <% else %>
+        <li><%= link_to '註冊', new_users_path %></li>
+        <li><%= link_to '登入', sign_in_users_path %></li>
+      <% end %>
     </ul>
   </div>
 </nav>

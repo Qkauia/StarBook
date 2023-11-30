@@ -1,0 +1,21 @@
+<h1>註冊會員</h1>
+
+<%= form_with model: @user, data: { turbo: false } do |f| %>
+
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  
+  <div><%= f.submit '註冊會員'%></div>
+<% end %>
