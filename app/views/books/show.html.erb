@@ -1,0 +1,8 @@
+<%= link_to "編輯", edit_book_path %>
+<%= link_to "刪除", book_path(@book), data: { turbo_method: 'delete',
+                                              turbo_confirm: '確定要刪除嗎？'} %>
+
+<h1><%= @book.title %></h1>
+<h3><%= @book.price %></h3>
+<p><%= @book.description %></p>
+

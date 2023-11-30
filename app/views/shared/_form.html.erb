@@ -1,0 +1,35 @@
+<% if book.errors.any? %>
+  <section>
+    <ul>
+      <% book.errors.full_messages.each do | message | %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+<%= form_with model: book, data:{ turbo: false } do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :price %>
+    <%= f.number_field :price %>
+  </div>
+
+  <div>
+    <%= f.label :onsale %>
+    <%= f.check_box :onsale %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+
+<% end %>
