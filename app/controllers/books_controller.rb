@@ -1,5 +1,8 @@
 class BooksController < ApplicationController
-  before_action :find_book, only: [ :show , :edit , :update, :destroy ]
+  before_action :find_book, only: [ :show ]
+  before_action :authenticate_user!, except: [ :index , :show ]
+  before_action :find_owned_book, only: [ :edit , :update , :destroy ]
+
   def index
     @books = Book.order(id: :desc)
   end
@@ -9,7 +12,8 @@ class BooksController < ApplicationController
   end
 
   def create
-    @book = Book.new(book_params)
+    # @book = Book.new(book_params)
+    @book = current_user.books.new(book_params)
     if @book.save
       redirect_to root_path, notice: '新增成功'
     else
@@ -18,6 +22,8 @@ class BooksController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = @book.comments
   end
 
   def edit
@@ -40,6 +46,10 @@ class BooksController < ApplicationController
 
   def find_book
     @book = Book.find(params[:id])
+  end
+
+  def find_owned_book
+    @book = current_user.books.find(params[:id])
   end
 
   def book_params

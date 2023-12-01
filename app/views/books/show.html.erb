@@ -1,9 +1,31 @@
-<%= link_to "編輯", edit_book_path %>
-<%= link_to "刪除", book_path(@book), data: { turbo_method: 'delete',
+<% if user_signed_in? and current_user.own?(@book) %>
+  <%= link_to "編輯", edit_book_path %>
+  <%= link_to "刪除", book_path(@book), data: { turbo_method: 'delete',
                                               turbo_confirm: '確定要刪除嗎？'} %>
+<% end %>
+
+
 
 <h1><%= @book.title %></h1>
 <h3><%= @book.price %></h3>
 <p><%= @book.description %></p>
 
+
+<section>
+  <h3>留言</h3>
+
+  <%= form_with( model: [@book, @comment], data: { turbo: false }) do |f| %>
+    <%= f.text_area :content %>
+    <div>
+      <%= f.submit '新增留言' %>
+    </div>
+  <% end %>
+
+
+  <ul>
+    <% @comments.each do |comment| %>
+      <li><%= comment.content %></li>
+    <% end %>
+  </ul>
+</section>
 

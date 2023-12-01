@@ -12,4 +12,9 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    session.delete(:__user_ticket__)
+    redirect_to root_path, notice: '登出成功'
+  end
+
 end
